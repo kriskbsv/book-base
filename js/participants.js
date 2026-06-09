@@ -63,14 +63,14 @@ function renderParticipants(participants) {
     const card = document.createElement("div");
     card.className = "participants__content-item";
  
-    const avatarSrc = user.avatar_url || "images/profile-avatar.jpg";
+    const avatarSrc = user.avatar_url || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23281e18'/%3E%3Ccircle cx='40' cy='32' r='14' fill='%23a58352' opacity='0.6'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='16' fill='%23a58352' opacity='0.6\'/%3E%3C/svg%3E";
  
     card.innerHTML = `
       <img
         src="${avatarSrc}"
         alt="${user.name}"
         class="participants__content-item-image"
-        onerror="this.src='images/profile-avatar.jpg'"
+        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'80\' viewBox=\'0 0 80 80\'%3E%3Ccircle cx=\'40\' cy=\'40\' r=\'40\' fill=\'%23281e18\'/%3E%3Ccircle cx=\'40\' cy=\'32\' r=\'14\' fill=\'%23a58352\' opacity=\'0.6\'/%3E%3Cellipse cx=\'40\' cy=\'68\' rx=\'22\' ry=\'16\' fill=\'%23a58352\' opacity=\'0.6\'/%3E%3C/svg%3E'"
       >
       <p class="participants__content-item-name">${user.name}</p>
       <button class="participants__content-item-button" data-user-id="${user.id}">
