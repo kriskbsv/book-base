@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Профиль — Book Base</title>
+</head>
+<body>
+  <main class="app profile">
+
+    <section class="profile__header">
+      <h1 class="profile__title">Профиль</h1>
+    </section>
+
+    <section class="profile__user">
+     <div class="profile__user-wrapper">
+  <div class="profile__avatar-wrapper">
+    <img 
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23281e18'/%3E%3C/svg%3E"
+      alt="Фото" 
+      class="profile__avatar" 
+      id="profileAvatar"
+    >
+    <span class="profile__avatar-hint">Нажми чтобы изменить</span>
+  </div>
+  <div class="profile__user-info">
+    <h2 class="profile__name" id="profileName">...</h2>
+  </div>
+</div>
+      </div>
+      <div class="profile__stats">
+        <div class="profile__stats-item">
+          <p class="profile__stats-number" id="visitedMeetingsCount">0</p>
+          <p class="profile__stats-text">посещенных встреч</p>
+        </div>
+        <div class="profile__stats-item">
+          <p class="profile__stats-number" id="quotesCount">0</p>
+          <p class="profile__stats-text">любимых цитат</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile__visited">
+      <div class="profile__section-top">
+        <h2 class="profile__section-title">Посещенные встречи</h2>
+      </div>
+      <!-- Список рендерится через JS -->
+      <div class="profile__visited-list" id="visitedMeetingsList"></div>
+    </section>
+
+    <section class="profile__quotes">
+      <div class="profile__section-top">
+        <h2 class="profile__section-title">Любимые цитаты</h2>
+        <button class="profile__section-link" id="addQuoteButton">Добавить +</button>
+      </div>
+      <!-- Список рендерится через JS -->
+      <div class="profile__quotes-list" id="quotesList"></div>
+    </section>
+
+    <!-- Модальное окно добавления цитаты -->
+    <div class="modal" id="quoteModal">
+      <div class="modal__overlay" id="quoteModalOverlay"></div>
+      <div class="modal__content">
+        <h3 class="modal__title">Новая цитата</h3>
+        <textarea class="modal__input" id="quoteText" placeholder="Текст цитаты" rows="4"></textarea>
+        <input class="modal__input" id="quoteAuthor" type="text" placeholder="Автор (необязательно)">
+        <div class="modal__buttons">
+          <button class="modal__cancel" id="quoteModalCancel">Отмена</button>
+          <button class="modal__submit" id="quoteModalSubmit">Сохранить</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="adminLink" style="display:none;">
+  <a href="admin.html" class="admin__entry-link">⚙ Панель администратора</a>
+</div>
+
+    <div class="app__footer">
+      <ul class="app__bottom-nav">
+        <li class="app__bottom-nav-item">
+          <a href="index.html" class="app__footer-link">
+            <img src="images/home.jpg" alt="Главная" class="app__footer-icon">
+            Главная
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="meetings.html" class="app__footer-link">
+            <img src="images/meetings.jpg" alt="Встречи" class="app__footer-icon">
+            Встречи
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="participants.html" class="app__footer-link">
+            <img src="images/participants.jpg" alt="Участники" class="app__footer-icon">
+            Участники
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="profile.html" class="app__footer-link app__footer-link_active">
+            <img src="images/profile.jpg" alt="Профиль" class="app__footer-icon">
+            Профиль
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </main>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

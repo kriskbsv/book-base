@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Админ — Book Base</title>
+</head>
+<body>
+  <main class="app admin">
+ 
+    <section class="admin__header">
+      <h1 class="admin__title">Админ</h1>
+    </section>
+ 
+    <!-- Доступ запрещён -->
+    <div class="admin__denied" id="adminDenied" style="display:none;">
+      <p class="admin__denied-text">У тебя нет доступа к этой странице.</p>
+      <a href="index.html" class="admin__denied-link">На главную</a>
+    </div>
+ 
+    <!-- Контент для админа -->
+    <div class="admin__content" id="adminContent" style="display:none;">
+ 
+      <!-- Секция 1: Добавить встречу -->
+      <section class="admin__section">
+        <h2 class="admin__section-title">Новая встреча</h2>
+ 
+        <div class="admin__form">
+          <input class="admin__input" id="newBookTitle"  type="text"   placeholder="Название книги">
+          <input class="admin__input" id="newBookAuthor" type="text"   placeholder="Автор">
+          <input class="admin__input" id="newBookCover"  type="url"    placeholder="Ссылка на обложку">
+          <input class="admin__input" id="newMeetingDate" type="text"  placeholder="Дата (например: 28 июня)">
+          <input class="admin__input" id="newMeetingTime" type="text"  placeholder="Время (например: 16:00)">
+          <input class="admin__input" id="newMeetingPlace" type="text" placeholder="Место">
+          <textarea class="admin__input admin__textarea" id="newMeetingDesc" placeholder="Описание (необязательно)" rows="3"></textarea>
+ 
+          <label class="admin__checkbox-label">
+            <input type="checkbox" id="newMeetingActive" checked>
+            Сделать активной (ближайшей)
+          </label>
+ 
+          <button class="admin__button" id="addMeetingButton">Добавить встречу</button>
+          <p class="admin__feedback" id="addMeetingFeedback"></p>
+        </div>
+      </section>
+ 
+      <!-- Секция 2: Отметить присутствие -->
+      <section class="admin__section">
+        <h2 class="admin__section-title">Отметить присутствие</h2>
+ 
+        <select class="admin__select" id="attendanceMeetingSelect">
+          <option value="">Выбери встречу...</option>
+        </select>
+ 
+        <div class="admin__attendance-list" id="attendanceList">
+          <p class="admin__hint">Выбери встречу чтобы увидеть список</p>
+        </div>
+ 
+        <button class="admin__button admin__button_secondary" id="saveAttendanceButton" style="display:none;">
+          Сохранить отметки
+        </button>
+        <p class="admin__feedback" id="saveAttendanceFeedback"></p>
+      </section>
+ 
+    </div>
+
+    <button class="admin__button admin__button_danger" id="closeMeetingButton" style="display:none;">
+  Завершить встречу
+</button>
+<p class="admin__feedback" id="closeMeetingFeedback"></p>
+
+ 
+  </main>
+ 
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

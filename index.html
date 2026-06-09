@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Book-Club</title>
+</head>
+<body>
+    <main class="app">
+      <section class="app__header">
+        <div class="app__logo">
+            <p class="app__logo-text">BOOK BASE</p>
+        </div>
+        <h1 class="app__title">Книжный клуб<br> для тех, кто любит<br> читать и обсуждать.</h1>
+        <p class="app__description">Встречаемся, читаем <br>и делимся мыслями о книгах.</p>
+      </section>
+
+      <section class="app__content">
+        <div class="app__content-wrapper">
+            <h2 class="app__content-title">Ближайшая встреча</h2>
+            <div class="app__content-item">
+                <img src="images/mag-sm.jpg" alt="Обложка книги" class="app__content-item-image" id="meetingCover">
+                <div class="app__content-item-info">
+                    <h3 class="app__content-item-title" id="meetingTitle">"Маг"</h3>
+                    <p class="app__content-item-author" id="meetingAuthor">Сомерсет Моэм</p>
+                    <p class="app__content-item-date" id="meetingDate">28 июня</p>
+                    <p class="app__content-item-time" id="meetingTime">16:00</p>
+                </div>
+            </div>
+            <button href="#" class="app__content-link" id="joinMeetingButton">Я приду</button>
+        </div>
+      </section>
+
+    <div class="app__footer">
+        <ul class="app__bottom-nav">
+            <li class="app__bottom-nav-item">
+              <a href="#" class="app__footer-link">
+                <img src="images/home.jpg" alt="Главная" class="app__footer-icon">
+                Главная
+              </a>
+            </li>
+            <li class="app__bottom-nav-item">
+              <a href="meetings.html" class="app__footer-link">
+                <img src="images/meetings.jpg" alt="Встречи" class="app__footer-icon">
+                Встречи
+              </a>
+            </li>
+            <li class="app__bottom-nav-item">
+              <a href="participants.html" class="app__footer-link">
+                <img src="images/participants.jpg" alt="Участники" class="app__footer-icon">
+                Участники
+              </a>
+            </li>
+            <li class="app__bottom-nav-item">
+              <a href="profile.html" class="app__footer-link">
+                <img src="images/profile.jpg" alt="Профиль" class="app__footer-icon">
+                Профиль
+              </a>
+            </li>
+        </ul>
+    </div>
+    </main>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+</body>
+</html>

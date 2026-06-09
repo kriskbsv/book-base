@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Участники — Book Base</title>
+</head>
+<body>
+  <main class="app participants">
+
+    <section class="participants__header">
+      <h1 class="participants__title">Участники</h1>
+    </section>
+
+    <div class="participants__info">
+  <div class="participants__search-field">
+    <span class="participants__search-icon">⌕</span>
+    <input type="text" id="participantsSearch" class="participants__search-input" placeholder="Поиск участников">
+  </div>
+  <div class="participants__info-wrapper">
+    <div class="participants__info-list">
+      <p class="participants__info-item-number" id="participantsCount">0</p>
+      <p class="participants__info-item">участника</p>
+    </div>
+    <div class="participants__info-list">
+      <p class="participants__info-item-number" id="meetingsCount">0</p>
+      <p class="participants__info-item">встреч посещено</p>
+    </div>
+  </div>
+</div>
+
+    <div class="participants__content">
+  <div id="participantsList"></div>
+</div>
+
+    <div class="app__footer">
+      <ul class="app__bottom-nav">
+        <li class="app__bottom-nav-item">
+          <a href="index.html" class="app__footer-link">
+            <img src="images/home.jpg" alt="Главная" class="app__footer-icon">
+            Главная
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="meetings.html" class="app__footer-link">
+            <img src="images/meetings.jpg" alt="Встречи" class="app__footer-icon">
+            Встречи
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="participants.html" class="app__footer-link app__footer-link_active">
+            <img src="images/participants.jpg" alt="Участники" class="app__footer-icon">
+            Участники
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="profile.html" class="app__footer-link">
+            <img src="images/profile.jpg" alt="Профиль" class="app__footer-icon">
+            Профиль
+          </a>
+        </li>
+      </ul>
+    </div>
+
+
+  </main>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/participants.js"></script>
+</body>
+</html>

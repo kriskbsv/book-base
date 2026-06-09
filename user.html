@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Участник — Book Base</title>
+</head>
+<body>
+  <main class="app profile">
+ 
+    <section class="profile__header">
+      <button class="profile__back" id="backButton">← Назад</button>
+      <h1 class="profile__title">Участник</h1>
+    </section>
+ 
+    <section class="profile__user">
+      <div class="profile__user-wrapper">
+        <img src="images/profile-avatar.jpg" alt="Фото участника" class="profile__avatar" id="userAvatar">
+        <div class="profile__user-info">
+          <h2 class="profile__name" id="userName">...</h2>
+          <p class="profile__username" id="userUsername"></p>
+        </div>
+      </div>
+ 
+      <div class="profile__stats">
+        <div class="profile__stats-item">
+          <p class="profile__stats-number" id="userMeetingsCount">0</p>
+          <p class="profile__stats-text">посещенных встреч</p>
+        </div>
+        <div class="profile__stats-item">
+          <p class="profile__stats-number" id="userQuotesCount">0</p>
+          <p class="profile__stats-text">любимых цитат</p>
+        </div>
+      </div>
+    </section>
+ 
+    <section class="profile__quotes">
+      <div class="profile__section-top">
+        <h2 class="profile__section-title">Любимые цитаты</h2>
+      </div>
+      <div class="profile__quotes-list" id="userQuotesList"></div>
+    </section>
+ 
+    <div class="app__footer">
+      <ul class="app__bottom-nav">
+        <li class="app__bottom-nav-item">
+          <a href="index.html" class="app__footer-link">
+            <img src="images/home.jpg" alt="Главная" class="app__footer-icon">
+            Главная
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="meetings.html" class="app__footer-link">
+            <img src="images/meetings.jpg" alt="Встречи" class="app__footer-icon">
+            Встречи
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="participants.html" class="app__footer-link app__footer-link_active">
+            <img src="images/participants.jpg" alt="Участники" class="app__footer-icon">
+            Участники
+          </a>
+        </li>
+        <li class="app__bottom-nav-item">
+          <a href="profile.html" class="app__footer-link">
+            <img src="images/profile.jpg" alt="Профиль" class="app__footer-icon">
+            Профиль
+          </a>
+        </li>
+      </ul>
+    </div>
+ 
+  </main>
+ 
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/user.js"></script>
+</body>
+</html>

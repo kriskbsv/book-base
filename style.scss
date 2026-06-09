@@ -1,0 +1,209 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cormorant', sans-serif;
+}
+
+.app {
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  overflow-y: auto;        /* добавь */
+  padding-bottom: 100px;  /* добавь — чтобы контент не прятался за навбар */
+
+
+&__content-link_joined {
+    background: transparent;
+  color: #8D7760;
+  border: 1px solid rgba(141, 119, 96, 0.3);
+  cursor: default;
+}
+
+&__header {
+    position: relative;
+    overflow: hidden;
+    background-image: url(images/hero-page-logo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    max-width: 430px;
+}
+
+&__header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15),
+        rgba(0,0,0,0.72)
+      );
+}
+
+&__logo-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #a58352;;
+    padding: 16px;
+    letter-spacing: 2px;
+}
+
+&__title {
+    color: white;
+    margin-top: 220px;
+    font-size: 38px;
+    font-weight: 400;
+    padding-left: 16px;
+    font-family: 'Cormorant', serif;
+    position: relative;
+    z-index: 2;
+    max-width: 320px;
+    line-height: 0.95;
+}
+&__description {
+    padding-top: 22px;
+    color: #D8C3A5;
+    padding-left: 16px;
+    padding-bottom: 50px;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 42px;
+}
+
+&__content {
+    background-color: #0E0B08;
+    height: 450px;
+}
+
+&__content-wrapper {
+  margin: -36px 16px 24px;
+  padding: 22px;
+  position: relative;
+  z-index: 3;
+  border-radius: 26px;
+  background: rgba(24, 18, 14, 0.92);
+  border: 1px solid rgba(216, 175, 117, 0.22);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  margin-bottom: 40px;
+}
+
+&__content-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+&__content-item-image {
+  width: 118px;
+  height: 160px;
+  border-radius: 14px;
+}
+
+
+&__content-title {
+  margin: 0 0 22px;
+  color: #F4E8D6;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+
+&__content-item-info {
+    margin-left: 16px;
+}
+
+&__content-item-title {
+    margin: 6px 0 8px;
+    color: #F4E8D6;
+    font-size: 24px;
+}
+
+&__content-item-author {
+    margin: 6px 0 8px;
+    color: #F4E8D6;
+    font-size: 24px;
+}
+
+&__content-item-date,
+&__content-item-time {
+    margin: 6px 0;
+    color: #BCA98F;
+}
+
+&__content-link {
+display: block;
+  margin-top: 24px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: #6F171D;
+  color: #F4E8D6;
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Cormorant', serif;
+  border: none;
+  cursor: pointer;
+  width: fit-content;        /* не на всю ширину */
+  min-width: 160px;
+}
+
+&__bottom-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 14px 12px 28px;
+    background: rgba(12, 8, 6, 0.92);
+    backdrop-filter: blur(18px);
+    border-top:
+      1px solid rgba(216, 175, 117, 0.12);
+    z-index: 50;
+}
+
+&__bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: #8D7760;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+&__footer-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #8F7A61;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+&__footer-link:hover,
+&__footer-link:active {
+  color: #6F171D;
+}
+
+
+&__footer-icon {
+  width: 45px;
+  height: 45px;
+}
+}
+
+
+@import "meetings";
+@import "participants";
+@import "profile";
+@import "admin";
