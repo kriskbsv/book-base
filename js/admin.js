@@ -13,7 +13,7 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
  
 const ADMIN_IDS = [
   "5194563864", // kris
-  // "123456789", // добавь других админов
+  "753274211",  // @atakell
 ];
  
 // ─────────────────────────────────────────────
