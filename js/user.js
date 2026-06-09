@@ -1,5 +1,4 @@
 
-
 // ─────────────────────────────────────────────
 // КОНФИГУРАЦИЯ
 // ─────────────────────────────────────────────
@@ -8,6 +7,8 @@ const SUPABASE_URL = "https://fbvrfykgbfkgpfrdnwvg.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZidnJmeWtnYmZrZ3BmcmRud3ZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxMzA4NDksImV4cCI6MjA5NTcwNjg0OX0.3W43-HLEdlWAqDhuPNYiC14voju7v1usqiS2gLRp-NA";
  
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+ 
+const AVATAR_PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23281e18'/%3E%3Ccircle cx='40' cy='32' r='14' fill='%23a58352' opacity='0.6'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='16' fill='%23a58352' opacity='0.6'/%3E%3C/svg%3E";
  
 // ─────────────────────────────────────────────
 // ПОЛУЧАЕМ ID ИЗ URL
@@ -23,7 +24,6 @@ function getUserIdFromUrl() {
 // ─────────────────────────────────────────────
  
 async function loadUserProfile(userId) {
-  // Данные пользователя
   const { data: user, error: userError } = await db
     .from("users")
     .select("*")
@@ -36,13 +36,15 @@ async function loadUserProfile(userId) {
     return;
   }
  
-  // Имя и аватар
+  // Имя и username
   document.getElementById("userName").textContent = user.name;
   document.getElementById("userUsername").textContent = user.username || "";
  
-  if (user.avatar_url) {
-    const avatar = document.getElementById("userAvatar");
-    if (avatar) avatar.src = user.avatar_url;
+  // Аватар — если есть url показываем его, иначе заглушку
+  const avatar = document.getElementById("userAvatar");
+  if (avatar) {
+    avatar.src = user.avatar_url || AVATAR_PLACEHOLDER;
+    avatar.onerror = () => { avatar.src = AVATAR_PLACEHOLDER; };
   }
  
   // Посещённые встречи
@@ -62,7 +64,7 @@ async function loadUserProfile(userId) {
     .eq("user_id", userId)
     .order("created_at", { ascending: false });
  
-  const quotesList = document.getElementById("userQuotesList");
+  const quotesList  = document.getElementById("userQuotesList");
   const quotesCount = quotesError ? 0 : (quotes?.length ?? 0);
   document.getElementById("userQuotesCount").textContent = quotesCount;
  
@@ -88,10 +90,7 @@ async function loadUserProfile(userId) {
 function initBackButton() {
   const btn = document.getElementById("backButton");
   if (!btn) return;
- 
-  btn.addEventListener("click", () => {
-    window.history.back();
-  });
+  btn.addEventListener("click", () => window.history.back());
 }
  
 // ─────────────────────────────────────────────
