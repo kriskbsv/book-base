@@ -236,6 +236,11 @@ async function initIndexPage() {
     button.addEventListener("click", () => joinMeeting(button));
   }
  
+  await Promise.all([
+    loadHomeAttendees(),
+    loadQuotesFeed(),
+  ]);
+
   console.log("Главная готова. Пользователь:", state.currentUser?.name, "| Встреча:", state.activeMeeting?.book_title);
 }
  
@@ -243,4 +248,84 @@ async function initIndexPage() {
 // СТАРТ
 // ─────────────────────────────────────────────
  
+
+// ─────────────────────────────────────────────
+// КТО ПРИДЁТ + ЛЕНТА ЦИТАТ (главная)
+// ─────────────────────────────────────────────
+
+const AVA_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23281e18'/%3E%3Ccircle cx='30' cy='24' r='10' fill='%23a58352' opacity='0.6'/%3E%3Cellipse cx='30' cy='50' rx='16' ry='12' fill='%23a58352' opacity='0.6'/%3E%3C/svg%3E";
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+async function loadHomeAttendees() {
+  const box = document.getElementById("homeAttendees");
+  if (!box || !state.activeMeeting) return;
+
+  const { data, error } = await db
+    .from("attendance")
+    .select("users ( name, avatar_url )")
+    .eq("meeting_id", state.activeMeeting.id)
+    .eq("will_come", true);
+
+  if (error) { console.error("Кто придёт:", error.message); return; }
+
+  const people = (data || []).map((r) => r.users).filter(Boolean);
+
+  if (people.length === 0) {
+    box.innerHTML = `<p class="attendees__empty">Будь первым, кто придёт →</p>`;
+    return;
+  }
+
+  const shown = people.slice(0, 5);
+  const extra = people.length - shown.length;
+
+  const avatars = shown.map((u) =>
+    `<img class="attendees__avatar" src="${u.avatar_url || AVA_FALLBACK}"
+          onerror="this.src='${AVA_FALLBACK}'" alt="${esc(u.name)}">`
+  ).join("");
+
+  const more = extra > 0 ? `<span class="attendees__more">+${extra}</span>` : "";
+  const word = people.length === 1 ? "идёт" : "идут";
+
+  box.innerHTML = `
+    <div class="attendees__avatars">${avatars}${more}</div>
+    <span class="attendees__label"><b>${people.length}</b> ${word}</span>
+  `;
+}
+
+async function loadQuotesFeed() {
+  const box = document.getElementById("quotesFeed");
+  const section = document.getElementById("quotesFeedSection");
+  if (!box) return;
+
+  const { data, error } = await db
+    .from("quotes")
+    .select("quote_text, quote_author, users ( name, avatar_url )")
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+  if (error) { console.error("Лента цитат:", error.message); return; }
+  if (!data || data.length === 0) return;
+
+  box.innerHTML = data.map((q) => {
+    const u = q.users || {};
+    const author = q.quote_author ? ` <span>— ${esc(q.quote_author)}</span>` : "";
+    return `
+      <div class="feed__item">
+        <p class="feed__quote">«${esc(q.quote_text)}»</p>
+        <div class="feed__by">
+          <img class="feed__avatar" src="${u.avatar_url || AVA_FALLBACK}"
+               onerror="this.src='${AVA_FALLBACK}'" alt="${esc(u.name)}">
+          <span class="feed__name">${esc(u.name || "Участник клуба")}${author}</span>
+        </div>
+      </div>`;
+  }).join("");
+
+  if (section) section.style.display = "block";
+}
+
+
 initIndexPage();

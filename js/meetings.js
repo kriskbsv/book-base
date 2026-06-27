@@ -176,7 +176,7 @@ function renderMeeting(meeting) {
         ${meeting.place ? `<p class="app__content-item-place">${meeting.place}</p>` : ""}
       </div>
     </div>
-    ${isActive ? `<button class="app__content-link" data-meeting-id="${meeting.id}">Я приду</button>` : ""}
+    ${isActive ? `<button class="app__content-link" data-meeting-id="${meeting.id}">Я приду</button><div class="js-att" data-att="${meeting.id}"></div>` : ""}
   `;
  
   return wrapper;
@@ -217,6 +217,8 @@ async function loadMeetings() {
         await checkAndSetButtonState(button, meeting.id);
         button.addEventListener("click", () => joinMeeting(button, meeting.id));
       }
+      const attBox = card.querySelector(".js-att");
+      if (attBox) await loadMeetingAttendees(meeting.id, attBox);
     }
   }
 }
@@ -240,4 +242,47 @@ async function initMeetingsPage() {
   console.log("Страница встреч готова. Пользователь:", state.currentUser?.name);
 }
  
+
+// ─────────────────────────────────────────────
+// КТО ПРИДЁТ
+// ─────────────────────────────────────────────
+
+const M_AVA_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23281e18'/%3E%3Ccircle cx='30' cy='24' r='10' fill='%23a58352' opacity='0.6'/%3E%3Cellipse cx='30' cy='50' rx='16' ry='12' fill='%23a58352' opacity='0.6'/%3E%3C/svg%3E";
+
+function mEsc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+async function loadMeetingAttendees(meetingId, box) {
+  const { data, error } = await db
+    .from("attendance")
+    .select("users ( name, avatar_url )")
+    .eq("meeting_id", meetingId)
+    .eq("will_come", true);
+
+  if (error) { console.error("Кто придёт:", error.message); return; }
+
+  const people = (data || []).map((r) => r.users).filter(Boolean);
+  if (people.length === 0) {
+    box.outerHTML = `<p class="attendees__empty">Будь первым, кто придёт →</p>`;
+    return;
+  }
+
+  const shown = people.slice(0, 5);
+  const extra = people.length - shown.length;
+  const avatars = shown.map((u) =>
+    `<img class="attendees__avatar" src="${u.avatar_url || M_AVA_FALLBACK}"
+          onerror="this.src='${M_AVA_FALLBACK}'" alt="${mEsc(u.name)}">`).join("");
+  const more = extra > 0 ? `<span class="attendees__more">+${extra}</span>` : "";
+  const word = people.length === 1 ? "идёт" : "идут";
+
+  box.className = "attendees";
+  box.innerHTML = `
+    <div class="attendees__avatars">${avatars}${more}</div>
+    <span class="attendees__label"><b>${people.length}</b> ${word}</span>
+  `;
+}
+
+
 initMeetingsPage();

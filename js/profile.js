@@ -201,47 +201,131 @@ function initAvatarUpload() {
 // ПОСЕЩЁННЫЕ ВСТРЕЧИ
 // ─────────────────────────────────────────────
  
+const COVER_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='70'%3E%3Crect width='50' height='70' rx='8' fill='%23241b14'/%3E%3Crect x='14' y='20' width='22' height='3' rx='1.5' fill='%23a58352' opacity='0.5'/%3E%3Crect x='14' y='28' width='22' height='3' rx='1.5' fill='%23a58352' opacity='0.5'/%3E%3Crect x='14' y='36' width='14' height='3' rx='1.5' fill='%23a58352' opacity='0.5'/%3E%3C/svg%3E";
+
+function escapeHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+// ── ТРЕКЕР НАГРАД (каждая 5-я встреча) ──
+function renderRewardTracker(attendedCount) {
+  const el = document.getElementById("rewardTracker");
+  if (!el) return;
+
+  const cycle       = attendedCount % 5;
+  const rewardReady = attendedCount > 0 && cycle === 0;
+  const filled      = rewardReady ? 5 : cycle;
+  const remaining   = rewardReady ? 0 : 5 - cycle;
+
+  const plural = (n) => {
+    const n10 = n % 10, n100 = n % 100;
+    if (n10 === 1 && n100 !== 11) return "встреча";
+    if (n10 >= 2 && n10 <= 4 && (n100 < 10 || n100 >= 20)) return "встречи";
+    return "встреч";
+  };
+
+  let segments = "";
+  for (let i = 1; i <= 5; i++) {
+    segments += `<div class="tracker__seg ${i <= filled ? "is-filled" : ""}"></div>`;
+  }
+  segments += `<div class="tracker__seg tracker__seg--gift ${rewardReady ? "is-filled" : ""}">🎁</div>`;
+
+  const note = rewardReady
+    ? `<b>Подарок ждёт тебя</b> на ближайшей встрече клуба ✨`
+    : `Ещё <b>${remaining}</b> ${plural(remaining)} до награды`;
+
+  el.innerHTML = `
+    <div class="tracker__top">
+      <span class="tracker__label">До награды</span>
+      <span class="tracker__count">Посещено: <b>${attendedCount}</b></span>
+    </div>
+    <div class="tracker__segments">${segments}</div>
+    <p class="tracker__note">${note}</p>
+  `;
+  el.style.display = "block";
+}
+
+// ── ОЦЕНКА КНИГИ (звёзды) ──
+async function updateRating(attendanceId, rating, starsEl) {
+  starsEl.querySelectorAll(".stars__star").forEach((s, i) => {
+    s.classList.toggle("is-on", i < rating);
+  });
+
+  const { error } = await db
+    .from("attendance")
+    .update({ rating })
+    .eq("id", attendanceId);
+
+  if (error) console.error("Ошибка сохранения оценки:", error.message);
+}
+
+function starsMarkup(rating) {
+  let out = "";
+  for (let i = 1; i <= 5; i++) {
+    out += `<span class="stars__star ${i <= (rating || 0) ? "is-on" : ""}" data-value="${i}">★</span>`;
+  }
+  return out;
+}
+
 async function loadVisitedMeetings(userId) {
   const listEl  = document.getElementById("visitedMeetingsList");
   const countEl = document.getElementById("visitedMeetingsCount");
- 
+
   const { data, error } = await db
     .from("attendance")
     .select(`
-      *,
+      id,
+      rating,
       meetings (
         book_title,
+        book_author,
+        book_cover,
         meeting_date
       )
     `)
     .eq("user_id", userId)
     .eq("attended", true);
- 
+
   if (error) {
     console.error("Ошибка загрузки встреч:", error.message);
     return;
   }
- 
-  if (countEl) countEl.textContent = data.length;
- 
+
+  const count = data.length;
+  if (countEl) countEl.textContent = count;
+  renderRewardTracker(count);
+
   if (!listEl) return;
- 
-  if (data.length === 0) {
-    listEl.innerHTML = `<p class="profile__empty">Пока нет посещённых встреч</p>`;
+
+  if (count === 0) {
+    listEl.innerHTML = `<p class="profile__empty">Полка пока пуста — приходи на встречу, и сюда встанет первая книга</p>`;
     return;
   }
- 
+
   listEl.innerHTML = "";
   data.forEach((item) => {
-    listEl.innerHTML += `
-      <div class="profile__visited-item">
-        <div class="profile__visited-info">
-          <p class="profile__visited-title">«${item.meetings.book_title}»</p>
-          <p class="profile__visited-date">${item.meetings.meeting_date}</p>
-        </div>
-        <span class="profile__visited-status">✓</span>
+    const m = item.meetings || {};
+    const card = document.createElement("div");
+    card.className = "shelf-item";
+    card.innerHTML = `
+      <img class="shelf-item__cover" src="${m.book_cover || COVER_FALLBACK}"
+           onerror="this.src='${COVER_FALLBACK}'" alt="${escapeHtml(m.book_title)}">
+      <div class="shelf-item__info">
+        <p class="shelf-item__title">«${escapeHtml(m.book_title)}»</p>
+        <p class="shelf-item__date">${escapeHtml(m.book_author || m.meeting_date || "")}</p>
+        <div class="stars">${starsMarkup(item.rating)}</div>
       </div>
     `;
+
+    const starsEl = card.querySelector(".stars");
+    starsEl.querySelectorAll(".stars__star").forEach((star) => {
+      star.addEventListener("click", () => {
+        updateRating(item.id, Number(star.dataset.value), starsEl);
+      });
+    });
+
+    listEl.appendChild(card);
   });
 }
  

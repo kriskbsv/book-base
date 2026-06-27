@@ -1,49 +1,37 @@
-.app {
-
-&__meetings {
-    background: #0E0B08;
-    min-height: 100vh;
-}
-&__header-meetings {
-    min-height: auto;
-    background: #0E0B08;
-}
-
-&__title-meetings {
-    padding-top: 40px;
-    color: #D8C3A5;
-    font-size: 44px;
-    font-weight: 400;
-    padding-left: 20px;
-    padding-bottom: 80px;
-}
-}
-
-/* Бейдж "Ближайшая" на активной встрече */
-.meetings__badge {
-  display: inline-block;
-  margin-bottom: 8px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  background: rgba(111, 23, 29, 0.3);
-  border: 1px solid rgba(111, 23, 29, 0.6);
-  color: #D8A87A;
-  font-size: 12px;
+/* ============================================================
+   Meetings page
+   ============================================================ */
+.app__meetings { background: var(--bg); min-height: 100vh; }
+.app__header-meetings { background: var(--bg); padding: 0; }
+.app__title-meetings {
+  padding: 46px 20px 51px;
+  color: var(--ink-2);
+  font-size: 42px;
+  font-weight: 500;
   letter-spacing: 0.5px;
 }
 
-/* Место проведения */
-.app__content-item-place {
-  margin: 6px 0;
-  color: #8D7760;
-  font-size: 14px;
+.meetings__badge {
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 8px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: rgba(111, 23, 29, 0.28);
+  border: 1px solid var(--wine-line);
+  color: var(--gold);
+  font-size: 13px;
+  letter-spacing: 0.8px;
 }
 
-/* Состояния загрузки и пустого списка */
 .meetings__loading,
-.meetings__empty {
-  color: #8D7760;
+.meetings__empty,
+.participants__empty,
+.profile__empty {
+  color: var(--muted-2);
   text-align: center;
-  padding: 40px 16px;
-  font-size: 16px;
+  padding: 48px 16px;
+  font-size: 18px;
+  font-style: italic;
 }
+
