@@ -2,82 +2,112 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#123E3B">
+  <title>Админ — Book Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
-  <title>Админ — Book Base</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&family=Unbounded:wght@600;700;800&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
-  <main class="app admin">
- 
-    <section class="admin__header">
-      <h1 class="admin__title">Админ</h1>
-    </section>
- 
-    <!-- Доступ запрещён -->
-    <div class="admin__denied" id="adminDenied" style="display:none;">
-      <p class="admin__denied-text">У тебя нет доступа к этой странице.</p>
-      <a href="index.html" class="admin__denied-link">На главную</a>
-    </div>
- 
-    <!-- Контент для админа -->
-    <div class="admin__content" id="adminContent" style="display:none;">
- 
-      <!-- Секция 1: Добавить встречу -->
-      <section class="admin__section">
-        <h2 class="admin__section-title">Новая встреча</h2>
- 
-        <div class="admin__form">
-          <input class="admin__input" id="newBookTitle"  type="text"   placeholder="Название книги">
-          <input class="admin__input" id="newBookAuthor" type="text"   placeholder="Автор">
-          <input class="admin__input" id="newBookCover"  type="url"    placeholder="Ссылка на обложку">
-          <input class="admin__input" id="newMeetingDate" type="text"  placeholder="Дата (например: 28 июня)">
-          <input class="admin__input" id="newMeetingTime" type="text"  placeholder="Время (например: 16:00)">
-          <input class="admin__input" id="newMeetingPlace" type="text" placeholder="Место">
-          <textarea class="admin__input admin__textarea" id="newMeetingDesc" placeholder="Описание (необязательно)" rows="3"></textarea>
- 
-          <label class="admin__checkbox-label">
-            <input type="checkbox" id="newMeetingActive" checked>
-            Сделать активной (ближайшей)
-          </label>
- 
-          <button class="admin__button" id="addMeetingButton">Добавить встречу</button>
-          <p class="admin__feedback" id="addMeetingFeedback"></p>
-        </div>
-      </section>
- 
-      <!-- Секция 2: Отметить присутствие -->
-      <section class="admin__section">
-        <h2 class="admin__section-title">Отметить присутствие</h2>
- 
-        <select class="admin__select" id="attendanceMeetingSelect">
-          <option value="">Выбери встречу...</option>
-        </select>
- 
-        <div class="admin__attendance-list" id="attendanceList">
-          <p class="admin__hint">Выбери встречу чтобы увидеть список</p>
-        </div>
- 
-        <button class="admin__button admin__button_secondary" id="saveAttendanceButton" style="display:none;">
-          Сохранить отметки
-        </button>
-        <p class="admin__feedback" id="saveAttendanceFeedback"></p>
-      </section>
- 
+  <main class="app">
+    <header class="pagehead">
+      <span class="bb-eyebrow">только для организаторов</span>
+      <h1 class="pagehead__title">Админ</h1>
+      <p class="pagehead__sub">Добавляй встречи, отмечай пришедших и выдавай подарки.</p>
+    </header>
+
+    <!-- нет доступа -->
+    <div class="admin-gate" id="adminDenied" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <p>У тебя нет доступа к этой странице.</p>
+      <a href="index.html">На главную</a>
     </div>
 
-    <button class="admin__button admin__button_danger" id="closeMeetingButton" style="display:none;">
-  Завершить встречу
-</button>
-<p class="admin__feedback" id="closeMeetingFeedback"></p>
+    <div class="admin-wrap" id="adminContent" style="display:none;">
 
- 
+      <!-- ── Новая встреча ── -->
+      <section class="card">
+        <div class="adm-sec-head">
+          <span class="adm-sec-ico" style="background:var(--red)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H20v14H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M12 8v6M9 11h6"/></svg>
+          </span>
+          <div class="adm-sec-title">Новая книга и встреча</div>
+        </div>
+
+        <div class="adm-field"><label for="newBookTitle">Название книги</label>
+          <input class="adm-input" id="newBookTitle" type="text" placeholder="Маг"></div>
+        <div class="adm-field"><label for="newBookAuthor">Автор</label>
+          <input class="adm-input" id="newBookAuthor" type="text" placeholder="Сомерсет Моэм"></div>
+        <div class="adm-field"><label for="newBookCover">Ссылка на обложку</label>
+          <input class="adm-input" id="newBookCover" type="url" placeholder="https://…/cover.jpg"></div>
+
+        <div class="adm-row2">
+          <div class="adm-field"><label for="newMeetingDate">Дата (текстом)</label>
+            <input class="adm-input" id="newMeetingDate" type="text" placeholder="6 сентября"></div>
+          <div class="adm-field"><label for="newMeetingTime">Время (текстом)</label>
+            <input class="adm-input" id="newMeetingTime" type="text" placeholder="16:00"></div>
+        </div>
+
+        <div class="adm-field"><label for="newMeetingAt">Дата и время для таймера</label>
+          <input class="adm-input" id="newMeetingAt" type="datetime-local"></div>
+        <div class="adm-field"><label for="newMeetingPlace">Место</label>
+          <input class="adm-input" id="newMeetingPlace" type="text" placeholder="Кофейня «Абзац»"></div>
+        <div class="adm-field"><label for="newMeetingDesc">Описание (необязательно)</label>
+          <textarea class="adm-textarea" id="newMeetingDesc" placeholder="Пара слов о книге и встрече"></textarea></div>
+
+        <label class="adm-check">
+          <input type="checkbox" id="newMeetingActive" checked>
+          Сделать ближайшей (показать на главной)
+        </label>
+
+        <button class="adm-btn" id="addMeetingButton">Добавить встречу</button>
+        <p class="adm-feedback" id="addMeetingFeedback"></p>
+      </section>
+
+      <!-- ── Отметить пришедших ── -->
+      <section class="card">
+        <div class="adm-sec-head">
+          <span class="adm-sec-ico" style="background:var(--teal)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <div class="adm-sec-title">Отметить пришедших</div>
+        </div>
+
+        <div class="adm-field"><label for="attendanceMeetingSelect">Встреча</label>
+          <select class="adm-select" id="attendanceMeetingSelect"><option value="">Выбери встречу…</option></select>
+        </div>
+
+        <div class="att-list" id="attendanceList">
+          <p class="adm-hint">Выбери встречу, чтобы увидеть записавшихся.</p>
+        </div>
+
+        <button class="adm-btn adm-btn_teal" id="saveAttendanceButton" style="display:none;">Сохранить отметки</button>
+        <button class="adm-btn adm-btn_danger" id="closeMeetingButton" style="display:none;margin-top:10px;">Завершить встречу</button>
+        <p class="adm-feedback" id="saveAttendanceFeedback"></p>
+      </section>
+
+      <!-- ── Трекер подарков ── -->
+      <section>
+        <div class="gift-head">
+          <span class="gift-head__ico">🎁</span>
+          <div>
+            <div class="gift-head__t">Подарки участникам</div>
+            <div class="gift-head__s">Каждые 5 посещённых встреч — подарок</div>
+          </div>
+        </div>
+        <div id="giftList" style="display:flex;flex-direction:column;gap:10px;margin-top:12px;">
+          <p class="adm-hint">Загружаем участников…</p>
+        </div>
+      </section>
+
+    </div>
   </main>
- 
+
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/admin.js"></script>
+  <script src="js/db.js?v=4"></script>
+  <script src="js/admin.js?v=4"></script>
 </body>
 </html>

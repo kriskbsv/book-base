@@ -2,74 +2,68 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#123E3B">
+  <title>Участники — Book Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
-  <title>Участники — Book Base</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&family=Unbounded:wght@600;700;800&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
-  <main class="app participants">
+  <main class="app">
+    <header class="pagehead">
+      <span class="bb-eyebrow">кто читает с нами</span>
+      <h1 class="pagehead__title">Участники</h1>
+      <p class="pagehead__sub">Небольшая тёплая компания, которая растёт от встречи к встрече.</p>
+    </header>
 
-    <section class="participants__header">
-      <h1 class="participants__title">Участники</h1>
+    <div class="stats reveal">
+      <div class="stat"><div class="stat__num">24</div><div class="stat__lbl">участника</div></div>
+      <div class="stat"><div class="stat__num">18</div><div class="stat__lbl">встреч позади</div></div>
+    </div>
+
+    <section class="list">
+      <div class="row reveal">
+        <div class="row__avatar" style="background:var(--red)">АК</div>
+        <div class="row__main"><div class="row__name">Анна Королёва</div><div class="row__meta">14 встреч · любит нон-фикшн</div></div>
+        <span class="row__tag">основатель</span>
+      </div>
+      <div class="row reveal">
+        <div class="row__avatar" style="background:var(--teal)">МД</div>
+        <div class="row__main"><div class="row__name">Максим Дорохов</div><div class="row__meta">11 встреч · фантастика</div></div>
+        <span class="row__tag">12 книг</span>
+      </div>
+      <div class="row reveal">
+        <div class="row__avatar" style="background:var(--butter);color:var(--ink)">ЛС</div>
+        <div class="row__main"><div class="row__name">Лена Соколова</div><div class="row__meta">9 встреч · классика</div></div>
+        <span class="row__tag">9 книг</span>
+      </div>
+      <div class="row reveal">
+        <div class="row__avatar" style="background:var(--teal-deep)">ИП</div>
+        <div class="row__main"><div class="row__name">Игорь Петров</div><div class="row__meta">7 встреч · детективы</div></div>
+        <span class="row__tag">7 книг</span>
+      </div>
+      <div class="row reveal">
+        <div class="row__avatar" style="background:var(--teal-ink)">ОВ</div>
+        <div class="row__main"><div class="row__name">Оля Власова</div><div class="row__meta">5 встреч · поэзия</div></div>
+        <span class="row__tag">новичок</span>
+      </div>
     </section>
 
-    <div class="participants__info reveal reveal-1">
-  <div class="participants__search-field">
-    <span class="participants__search-icon">⌕</span>
-    <input type="text" id="participantsSearch" class="participants__search-input" placeholder="Поиск участников">
-  </div>
-  <div class="participants__info-wrapper">
-    <div class="participants__info-list">
-      <p class="participants__info-item-number" id="participantsCount">0</p>
-      <p class="participants__info-item">участника</p>
-    </div>
-    <div class="participants__info-list">
-      <p class="participants__info-item-number" id="meetingsCount">0</p>
-      <p class="participants__info-item">встреч посещено</p>
-    </div>
-  </div>
-</div>
-
-    <div class="participants__content reveal reveal-2">
-  <div id="participantsList"></div>
-</div>
-
-    <div class="app__footer">
-      <ul class="app__bottom-nav">
-        <li class="app__bottom-nav-item">
-          <a href="index.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3l9 7.6"/><path d="M5.2 9.4V20a1 1 0 0 0 1 1H9v-5.5h6V21h2.8a1 1 0 0 0 1-1V9.4"/></svg>
-            Главная
-          </a>
-        </li>
-        <li class="app__bottom-nav-item">
-          <a href="meetings.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.6C10.4 5.2 7.8 4.7 5 5.2V18c2.8-.5 5.4 0 7 1.4 1.6-1.4 4.2-1.9 7-1.4V5.2c-2.8-.5-5.4 0-7 1.4Z"/><path d="M12 6.6v12.8"/></svg>
-            Встречи
-          </a>
-        </li>
-        <li class="app__bottom-nav-item">
-          <a href="participants.html" class="app__footer-link app__footer-link_active">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.4" r="2.7"/><path d="M3.8 19.4a5.2 5.2 0 0 1 10.4 0"/><circle cx="17" cy="9" r="2.1"/><path d="M16.2 13.6a4.4 4.4 0 0 1 4.5 4.9"/></svg>
-            Участники
-          </a>
-        </li>
-        <li class="app__bottom-nav-item">
-          <a href="profile.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.2"/><path d="M5.6 20a6.4 6.4 0 0 1 12.8 0"/></svg>
-            Профиль
-          </a>
-        </li>
+    <nav class="nav" aria-label="Основная навигация">
+      <ul class="nav__list">
+        <li><a href="index.html" class="nav__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.6 12 3l9 7.6"/><path d="M5.2 9.4V20a1 1 0 0 0 1 1H9v-5.5h6V21h2.8a1 1 0 0 0 1-1V9.4"/></svg>Главная</a></li>
+        <li><a href="meetings.html" class="nav__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.6C10.4 5.2 7.8 4.7 5 5.2V18c2.8-.5 5.4 0 7 1.4 1.6-1.4 4.2-1.9 7-1.4V5.2c-2.8-.5-5.4 0-7 1.4Z"/><path d="M12 6.6v12.8"/></svg>Встречи</a></li>
+        <li><a href="participants.html" class="nav__link is-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.4" r="2.7"/><path d="M3.8 19.4a5.2 5.2 0 0 1 10.4 0"/><circle cx="17" cy="9" r="2.1"/><path d="M16.2 13.6a4.4 4.4 0 0 1 4.5 4.9"/></svg>Участники</a></li>
+        <li><a href="profile.html" class="nav__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.4" r="3.2"/><path d="M5.6 20a6.4 6.4 0 0 1 12.8 0"/></svg>Профиль</a></li>
       </ul>
-    </div>
-
-
+    </nav>
   </main>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/participants.js"></script>
+  <script src="js/db.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
+  <script src="js/participants.js?v=4"></script>
 </body>
 </html>

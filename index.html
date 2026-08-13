@@ -2,76 +2,267 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#123E3B">
+  <title>Book Base — книжный клуб</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
-  <title>Book-Club</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&family=Unbounded:wght@600;700;800&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
-    <main class="app">
-      <section class="app__header">
-        <div class="app__logo">
-            <p class="app__logo-text">BOOK BASE</p>
-        </div>
-        <h1 class="app__title">Книжный клуб<br> для тех, кто любит<br> читать и обсуждать.</h1>
-        <p class="app__description">Встречаемся, читаем <br>и делимся мыслями о книгах.</p>
-      </section>
+  <main class="app">
 
-      <section class="app__content reveal reveal-1">
-        <div class="app__content-wrapper">
-            <h2 class="app__content-title">Ближайшая встреча</h2>
-            <div class="app__content-item">
-                <img src="images/mag-sm.jpg" alt="Обложка книги" class="app__content-item-image" id="meetingCover">
-                <div class="app__content-item-info">
-                    <h3 class="app__content-item-title" id="meetingTitle">"Маг"</h3>
-                    <p class="app__content-item-author" id="meetingAuthor">Сомерсет Моэм</p>
-                    <p class="app__content-item-date" id="meetingDate">28 июня</p>
-                    <p class="app__content-item-time" id="meetingTime">16:00</p>
-                </div>
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div class="hero__top">
+        <span class="hero__wordmark"><span class="hero__mark">B</span>BOOK BASE</span>
+        <span class="hero__badge">клуб · с 2023</span>
+      </div>
+
+      <span class="bb-eyebrow hero__eyebrow">книжный клуб</span>
+      <h1 class="hero__title">
+        <span class="w">Читаем.</span>
+        <span class="w accent-red">Встречаемся.</span>
+        <span class="w accent">Спорим.</span>
+      </h1>
+      <p class="hero__sub">Для тех, кому мало просто прочитать — хочется обсудить, поспорить и услышать чужой взгляд на книгу.</p>
+
+      <a href="#meeting" class="hero__cta">
+        Ближайшая встреча
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span class="ticker__item">Маг</span>
+          <span class="ticker__item">1984</span>
+          <span class="ticker__item">Убить пересмешника</span>
+          <span class="ticker__item">Мастер и Маргарита</span>
+          <span class="ticker__item">Норвежский лес</span>
+          <span class="ticker__item">Пикник на обочине</span>
+          <span class="ticker__item">Маг</span>
+          <span class="ticker__item">1984</span>
+          <span class="ticker__item">Убить пересмешника</span>
+          <span class="ticker__item">Мастер и Маргарита</span>
+          <span class="ticker__item">Норвежский лес</span>
+          <span class="ticker__item">Пикник на обочине</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ NEXT MEETING ============ -->
+    <section class="meeting reveal" id="meeting">
+      <div class="meeting__card">
+        <span class="meeting__ribbon">ближайшая</span>
+        <div class="meeting__body">
+          <div class="meeting__cover-wrap">
+            <img src="images/mag.jpg" alt="Обложка книги" class="meeting__cover" id="mCover">
+          </div>
+          <div class="meeting__info">
+            <span class="meeting__label">читаем сейчас</span>
+            <h2 class="meeting__title" id="mTitle">Маг</h2>
+            <p class="meeting__author" id="mAuthor">Сомерсет Моэм</p>
+            <div class="meeting__meta">
+              <span class="meeting__chip" id="mDate">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+                6 сентября
+              </span>
+              <span class="meeting__chip" id="mTime">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                16:00
+              </span>
+              <span class="meeting__chip" id="mPlace">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                Кофейня «Абзац»
+              </span>
             </div>
-            <button href="#" class="app__content-link" id="joinMeetingButton">Я приду</button>
-            <div id="homeAttendees"></div>
+          </div>
         </div>
-      </section>
 
-      <section class="feed" id="quotesFeedSection" style="display:none;">
-        <h2 class="feed__title">Из читательских дневников</h2>
-        <div id="quotesFeed"></div>
-      </section>
+        <div class="countdown" data-countdown="2026-09-06T16:00:00">
+          <div class="countdown__unit"><div class="countdown__num" data-d>0</div><div class="countdown__lbl">дней</div></div>
+          <div class="countdown__unit"><div class="countdown__num" data-h>00</div><div class="countdown__lbl">часов</div></div>
+          <div class="countdown__unit"><div class="countdown__num" data-m>00</div><div class="countdown__lbl">минут</div></div>
+          <div class="countdown__unit"><div class="countdown__num" data-s>00</div><div class="countdown__lbl">секунд</div></div>
+        </div>
 
-    <div class="app__footer">
-        <ul class="app__bottom-nav">
-        <li class="app__bottom-nav-item">
-          <a href="index.html" class="app__footer-link app__footer-link_active">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3l9 7.6"/><path d="M5.2 9.4V20a1 1 0 0 0 1 1H9v-5.5h6V21h2.8a1 1 0 0 0 1-1V9.4"/></svg>
+        <div class="attend">
+          <button class="attend__btn" id="attendBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Я приду</span>
+          </button>
+          <div class="attend__count">
+            <div class="attend__avatars" id="attendAvatars">
+              <span style="background:var(--red)">А</span>
+              <span style="background:var(--teal)">М</span>
+              <span style="background:var(--butter);color:var(--ink)">Л</span>
+            </div>
+            <div class="attend__num"><b id="attendNum">12</b>уже идут</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SUGGEST A BOOK ============ -->
+    <section class="suggest reveal">
+      <div class="suggest__box">
+        <span class="bb-eyebrow suggest__eyebrow">твоя очередь</span>
+        <h2 class="suggest__title">Что читаем<br>дальше — решаешь ты</h2>
+        <p class="suggest__text">Есть книга, которую давно хочется обсудить вслух? Предложи её клубу — за самые интересные проголосуем вместе.</p>
+        <button class="suggest__btn" type="button" data-open-suggest>
+          <span class="suggest__plus">+</span>
+          Предложить книгу для прочтения
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ NEXT UP SHELF ============ -->
+    <section class="shelf reveal">
+      <div class="shelf__head">
+        <span class="bb-eyebrow">на голосовании</span>
+        <h2 class="bb-section-title">В списке на будущее</h2>
+      </div>
+      <div class="shelf__scroll">
+        <article class="book" tabindex="0">
+          <div class="book__cover" style="background:var(--teal-deep)">
+            <span class="cv-top">роман · 1949</span>
+            <div><div class="cv-title">1984</div><div class="cv-author">Джордж Оруэлл</div></div>
+          </div>
+          <div class="book__meta">
+            <span class="book__votes"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l2.4 5.4 5.6.5-4.2 3.7 1.3 5.5L12 21l-5.1-1.4 1.3-5.5-4.2-3.7 5.6-.5z"/></svg>18 голосов</span>
+            <div class="book__name">Антиутопия</div>
+          </div>
+        </article>
+
+        <article class="book" tabindex="0">
+          <div class="book__cover" style="background:var(--red)">
+            <span class="cv-top">роман · 1960</span>
+            <div><div class="cv-title">Убить пересмешника</div><div class="cv-author">Харпер Ли</div></div>
+          </div>
+          <div class="book__meta">
+            <span class="book__votes"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l2.4 5.4 5.6.5-4.2 3.7 1.3 5.5L12 21l-5.1-1.4 1.3-5.5-4.2-3.7 5.6-.5z"/></svg>15 голосов</span>
+            <div class="book__name">Драма</div>
+          </div>
+        </article>
+
+        <article class="book" tabindex="0">
+          <div class="book__cover" style="background:var(--butter);color:var(--ink)">
+            <span class="cv-top">роман · 1967</span>
+            <div><div class="cv-title">Сто лет одиночества</div><div class="cv-author">Г. Г. Маркес</div></div>
+          </div>
+          <div class="book__meta">
+            <span class="book__votes"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l2.4 5.4 5.6.5-4.2 3.7 1.3 5.5L12 21l-5.1-1.4 1.3-5.5-4.2-3.7 5.6-.5z"/></svg>11 голосов</span>
+            <div class="book__name">Магический реализм</div>
+          </div>
+        </article>
+
+        <article class="book" tabindex="0">
+          <div class="book__cover" style="background:var(--ink)">
+            <span class="cv-top">роман · 1966</span>
+            <div><div class="cv-title">Мастер и Маргарита</div><div class="cv-author">М. Булгаков</div></div>
+          </div>
+          <div class="book__meta">
+            <span class="book__votes"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l2.4 5.4 5.6.5-4.2 3.7 1.3 5.5L12 21l-5.1-1.4 1.3-5.5-4.2-3.7 5.6-.5z"/></svg>9 голосов</span>
+            <div class="book__name">Классика</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how reveal">
+      <span class="bb-eyebrow">как это устроено</span>
+      <h2 class="bb-section-title">Три шага до встречи</h2>
+      <div class="how__steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div><div class="step__title">Выбираем книгу</div><div class="step__text">Каждый предлагает, что почитать. Голосуем и выбираем одну на месяц.</div></div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div><div class="step__title">Читаем месяц</div><div class="step__text">Спокойный темп: успеваешь и жить, и дочитать до встречи.</div></div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div><div class="step__title">Встречаемся и обсуждаем</div><div class="step__text">Собираемся вживую, делимся впечатлениями и спорим до последней страницы.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOTTOM NAV ============ -->
+    <nav class="nav" aria-label="Основная навигация">
+      <ul class="nav__list">
+        <li>
+          <a href="index.html" class="nav__link is-active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.6 12 3l9 7.6"/><path d="M5.2 9.4V20a1 1 0 0 0 1 1H9v-5.5h6V21h2.8a1 1 0 0 0 1-1V9.4"/></svg>
             Главная
           </a>
         </li>
-        <li class="app__bottom-nav-item">
-          <a href="meetings.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.6C10.4 5.2 7.8 4.7 5 5.2V18c2.8-.5 5.4 0 7 1.4 1.6-1.4 4.2-1.9 7-1.4V5.2c-2.8-.5-5.4 0-7 1.4Z"/><path d="M12 6.6v12.8"/></svg>
+        <li>
+          <a href="meetings.html" class="nav__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.6C10.4 5.2 7.8 4.7 5 5.2V18c2.8-.5 5.4 0 7 1.4 1.6-1.4 4.2-1.9 7-1.4V5.2c-2.8-.5-5.4 0-7 1.4Z"/><path d="M12 6.6v12.8"/></svg>
             Встречи
           </a>
         </li>
-        <li class="app__bottom-nav-item">
-          <a href="participants.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.4" r="2.7"/><path d="M3.8 19.4a5.2 5.2 0 0 1 10.4 0"/><circle cx="17" cy="9" r="2.1"/><path d="M16.2 13.6a4.4 4.4 0 0 1 4.5 4.9"/></svg>
+        <li>
+          <a href="participants.html" class="nav__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.4" r="2.7"/><path d="M3.8 19.4a5.2 5.2 0 0 1 10.4 0"/><circle cx="17" cy="9" r="2.1"/><path d="M16.2 13.6a4.4 4.4 0 0 1 4.5 4.9"/></svg>
             Участники
           </a>
         </li>
-        <li class="app__bottom-nav-item">
-          <a href="profile.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.2"/><path d="M5.6 20a6.4 6.4 0 0 1 12.8 0"/></svg>
+        <li>
+          <a href="profile.html" class="nav__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.4" r="3.2"/><path d="M5.6 20a6.4 6.4 0 0 1 12.8 0"/></svg>
             Профиль
           </a>
         </li>
       </ul>
+    </nav>
+  </main>
+
+  <!-- ============ SUGGEST MODAL ============ -->
+  <div class="modal" id="suggestModal" role="dialog" aria-modal="true" aria-labelledby="suggestModalTitle">
+    <div class="modal__scrim" data-close></div>
+    <div class="modal__sheet">
+      <div class="modal__grip"></div>
+
+      <form class="modal__form" id="suggestForm">
+        <h2 class="modal__title" id="suggestModalTitle">Предложить книгу</h2>
+        <p class="modal__sub">Расскажи, что стоит прочитать клубу. Остальные проголосуют.</p>
+
+        <div class="field">
+          <label for="bookTitle">Название книги</label>
+          <input id="bookTitle" name="title" type="text" placeholder="Например, «Дюна»" required>
+        </div>
+        <div class="field">
+          <label for="bookAuthor">Автор</label>
+          <input id="bookAuthor" name="author" type="text" placeholder="Фрэнк Герберт" required>
+        </div>
+        <div class="field">
+          <label for="bookWhy">Почему стоит прочитать</label>
+          <textarea id="bookWhy" name="why" placeholder="Пару слов — чем зацепит и о чём захочется поспорить"></textarea>
+        </div>
+
+        <button class="modal__submit" type="submit">Отправить предложение</button>
+      </form>
+
+      <div class="modal__success">
+        <div class="modal__check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3>Предложение отправлено</h3>
+        <p>Спасибо! Оно появится в списке на голосование — следи за встречами.</p>
+        <button class="modal__submit" type="button" data-close style="margin-top:18px;">Готово</button>
+      </div>
     </div>
-    </main>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase.js"></script>
+  </div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/db.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
+  <script src="js/home.js?v=4"></script>
 </body>
 </html>

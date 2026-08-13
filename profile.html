@@ -2,117 +2,96 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#123E3B">
+  <title>Профиль — Book Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
-  <title>Профиль — Book Base</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&family=Unbounded:wght@600;700;800&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
-  <main class="app profile">
+  <main class="app">
+    <header class="pagehead">
+      <span class="bb-eyebrow">твой профиль</span>
+      <h1 class="pagehead__title">Привет,<br>читатель</h1>
+      <p class="pagehead__sub">Твой книжный путь в клубе — по одной книге за раз.</p>
+    </header>
 
-    <section class="profile__header">
-      <h1 class="profile__title">Профиль</h1>
-    </section>
+    <div class="stats reveal">
+      <div class="stat"><div class="stat__num" id="pRead">7</div><div class="stat__lbl">книг прочитано</div></div>
+      <div class="stat"><div class="stat__num" id="pAttended">6</div><div class="stat__lbl">встреч посещено</div></div>
+    </div>
 
-    <section class="profile__user reveal reveal-1">
-     <div class="profile__user-wrapper">
-  <div class="profile__avatar-wrapper">
-     <img 
-  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23281e18'/%3E%3Ccircle cx='40' cy='32' r='14' fill='%23a58352' opacity='0.6'/%3E%3Cellipse cx='40' cy='68' rx='22' ry='16' fill='%23a58352' opacity='0.6'/%3E%3C/svg%3E"
-  alt="Фото" 
-  class="profile__avatar" 
-  id="profileAvatar"
->
-    <span class="profile__avatar-hint">Нажми чтобы изменить</span>
-  </div>
-  <div class="profile__user-info">
-    <h2 class="profile__name" id="profileName">...</h2>
-  </div>
-</div>
-      </div>
-      <div class="profile__stats">
-        <div class="profile__stats-item">
-          <p class="profile__stats-number" id="visitedMeetingsCount">0</p>
-          <p class="profile__stats-text">посещенных встреч</p>
-        </div>
-        <div class="profile__stats-item">
-          <p class="profile__stats-number" id="quotesCount">0</p>
-          <p class="profile__stats-text">любимых цитат</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="profile__tracker reveal reveal-2" id="rewardTracker" style="display:none;"></section>
-
-    <section class="profile__visited reveal reveal-3">
-      <div class="profile__section-top">
-        <h2 class="profile__section-title">Моя книжная полка</h2>
-      </div>
-      <!-- Список рендерится через JS -->
-      <div class="profile__visited-list" id="visitedMeetingsList"></div>
-    </section>
-
-    <section class="profile__quotes reveal reveal-4">
-      <div class="profile__section-top">
-        <h2 class="profile__section-title">Любимые цитаты</h2>
-        <button class="profile__section-link" id="addQuoteButton">Добавить +</button>
-      </div>
-      <!-- Список рендерится через JS -->
-      <div class="profile__quotes-list" id="quotesList"></div>
-    </section>
-
-    <!-- Модальное окно добавления цитаты -->
-    <div class="modal" id="quoteModal">
-      <div class="modal__overlay" id="quoteModalOverlay"></div>
-      <div class="modal__content">
-        <h3 class="modal__title">Новая цитата</h3>
-        <textarea class="modal__input" id="quoteText" placeholder="Текст цитаты" rows="4"></textarea>
-        <input class="modal__input" id="quoteAuthor" type="text" placeholder="Автор (необязательно)">
-        <div class="modal__buttons">
-          <button class="modal__cancel" id="quoteModalCancel">Отмена</button>
-          <button class="modal__submit" id="quoteModalSubmit">Сохранить</button>
-        </div>
+    <div style="padding:16px 22px 0;">
+      <div class="giftcard reveal" id="giftCard">
+        <span class="giftcard__lbl">трекер подарков</span>
+        <div class="giftcard__big" id="giftBig">Ещё 4 встречи<br>до подарка</div>
+        <div class="giftcard__sub" id="giftSub">Приходишь на встречи — на каждой пятой ждёт подарок 🎁</div>
+        <div class="giftbar"><div class="giftbar__fill" id="giftFill" style="width:20%"></div></div>
+        <div id="giftPending"></div>
       </div>
     </div>
 
-    <div id="adminLink" style="display:none;">
-  <a href="admin.html" class="admin__entry-link">⚙ Панель администратора</a>
-</div>
+    <section class="list">
+      <span class="bb-eyebrow">моя полка</span>
+      <div class="row reveal">
+        <div class="row__avatar" style="background:var(--teal-deep)">М</div>
+        <div class="row__main"><div class="row__name">Маг</div><div class="row__meta">Сомерсет Моэм · читаю сейчас</div></div>
+        <span class="row__tag">в процессе</span>
+      </div>
+      <div class="row reveal">
+        <div class="row__avatar" style="background:var(--ink)">1</div>
+        <div class="row__main"><div class="row__name">1984</div><div class="row__meta">Джордж Оруэлл · прочитано</div></div>
+        <span class="row__tag">★ 5.0</span>
+      </div>
+      <div class="row reveal">
+        <div class="row__avatar" style="background:var(--red)">Н</div>
+        <div class="row__main"><div class="row__name">Норвежский лес</div><div class="row__meta">Харуки Мураками · прочитано</div></div>
+        <span class="row__tag">★ 4.0</span>
+      </div>
 
-    <div class="app__footer">
-      <ul class="app__bottom-nav">
-        <li class="app__bottom-nav-item">
-          <a href="index.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.6 12 3l9 7.6"/><path d="M5.2 9.4V20a1 1 0 0 0 1 1H9v-5.5h6V21h2.8a1 1 0 0 0 1-1V9.4"/></svg>
-            Главная
-          </a>
-        </li>
-        <li class="app__bottom-nav-item">
-          <a href="meetings.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.6C10.4 5.2 7.8 4.7 5 5.2V18c2.8-.5 5.4 0 7 1.4 1.6-1.4 4.2-1.9 7-1.4V5.2c-2.8-.5-5.4 0-7 1.4Z"/><path d="M12 6.6v12.8"/></svg>
-            Встречи
-          </a>
-        </li>
-        <li class="app__bottom-nav-item">
-          <a href="participants.html" class="app__footer-link">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.4" r="2.7"/><path d="M3.8 19.4a5.2 5.2 0 0 1 10.4 0"/><circle cx="17" cy="9" r="2.1"/><path d="M16.2 13.6a4.4 4.4 0 0 1 4.5 4.9"/></svg>
-            Участники
-          </a>
-        </li>
-        <li class="app__bottom-nav-item">
-          <a href="profile.html" class="app__footer-link app__footer-link_active">
-            <svg class="app__footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.2"/><path d="M5.6 20a6.4 6.4 0 0 1 12.8 0"/></svg>
-            Профиль
-          </a>
-        </li>
+      <button class="suggest__btn" type="button" data-open-suggest style="align-self:flex-start;margin-top:8px;">
+        <span class="suggest__plus">+</span>
+        Предложить книгу
+      </button>
+    </section>
+
+    <nav class="nav" aria-label="Основная навигация">
+      <ul class="nav__list">
+        <li><a href="index.html" class="nav__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.6 12 3l9 7.6"/><path d="M5.2 9.4V20a1 1 0 0 0 1 1H9v-5.5h6V21h2.8a1 1 0 0 0 1-1V9.4"/></svg>Главная</a></li>
+        <li><a href="meetings.html" class="nav__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.6C10.4 5.2 7.8 4.7 5 5.2V18c2.8-.5 5.4 0 7 1.4 1.6-1.4 4.2-1.9 7-1.4V5.2c-2.8-.5-5.4 0-7 1.4Z"/><path d="M12 6.6v12.8"/></svg>Встречи</a></li>
+        <li><a href="participants.html" class="nav__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.4" r="2.7"/><path d="M3.8 19.4a5.2 5.2 0 0 1 10.4 0"/><circle cx="17" cy="9" r="2.1"/><path d="M16.2 13.6a4.4 4.4 0 0 1 4.5 4.9"/></svg>Участники</a></li>
+        <li><a href="profile.html" class="nav__link is-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.4" r="3.2"/><path d="M5.6 20a6.4 6.4 0 0 1 12.8 0"/></svg>Профиль</a></li>
       </ul>
-    </div>
-
+    </nav>
   </main>
+
+  <div class="modal" id="suggestModal" role="dialog" aria-modal="true" aria-labelledby="suggestModalTitle">
+    <div class="modal__scrim" data-close></div>
+    <div class="modal__sheet">
+      <div class="modal__grip"></div>
+      <form class="modal__form" id="suggestForm">
+        <h2 class="modal__title" id="suggestModalTitle">Предложить книгу</h2>
+        <p class="modal__sub">Расскажи, что стоит прочитать клубу. Остальные проголосуют.</p>
+        <div class="field"><label for="bookTitle">Название книги</label><input id="bookTitle" name="title" type="text" placeholder="Например, «Дюна»" required></div>
+        <div class="field"><label for="bookAuthor">Автор</label><input id="bookAuthor" name="author" type="text" placeholder="Фрэнк Герберт" required></div>
+        <div class="field"><label for="bookWhy">Почему стоит прочитать</label><textarea id="bookWhy" name="why" placeholder="Пару слов — чем зацепит и о чём захочется поспорить"></textarea></div>
+        <button class="modal__submit" type="submit">Отправить предложение</button>
+      </form>
+      <div class="modal__success">
+        <div class="modal__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Предложение отправлено</h3>
+        <p>Спасибо! Оно появится в списке на голосование — следи за встречами.</p>
+        <button class="modal__submit" type="button" data-close style="margin-top:18px;">Готово</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/profile.js"></script>
+  <script src="js/db.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
+  <script src="js/profile.js?v=4"></script>
 </body>
 </html>
